@@ -1,0 +1,73 @@
+body {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#apiNav
+{
+	width:		225px;
+	overflow:	auto;
+}
+#footer
+{
+	height:		35px;
+}
+#footer a
+{
+	font-size:	12px;
+	padding:	7px 20px;
+}
+.contentBox
+{
+	position:				relative;
+	margin:					15px 0;
+	padding:				27px 0 0;
+	background-color:		white;
+	border: 1px solid		#DDD;
+	-webkit-border-radius:	4px;
+	-moz-border-radius:		4px;
+	border-radius:			4px;
+}
+.contentBox.labeled:after
+{
+	content:				attr(data-label);
+	position:				absolute;
+	top:					-1px;
+	left:					-1px;
+	z-index:				10000;
+	padding:				3px 7px;
+	font-size:				12px;
+	font-weight:			bold;
+	background-color:		#f5f5f5;
+	border: 1px solid		#ddd;
+	color:					#9da0a4;
+	-webkit-border-radius:	4px 0 4px 0;
+	-moz-border-radius:		4px 0 4px 0;
+	border-radius:			4px 0 4px 0;
+}
+
+.exampleBox.row-fluid [class*="span"]
+{
+	margin-left: 0px;
+}
+.exampleBox.row-fluid [class*="span"]:first-child
+{
+	margin-left: 17px;
+}
+
+.exampleBox .example,
+.exampleBox .editor
+{
+	height:		400px;
+	width:		100%;
+}
+.exampleBox .contentBox:first-child
+{
+	-webkit-border-radius:	4px 0 0 4px;
+	-moz-border-radius:		4px 0 0 4px;
+	border-radius:			4px 0 0 4px;
+}
+.exampleBox .contentBox
+{
+	-webkit-border-radius:	0 4px 4px 0;
+	-moz-border-radius:		0 4px 4px 0;
+	border-radius:			0 4px 4px 0;
+}
