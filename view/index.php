@@ -9,7 +9,7 @@
 		<meta name="author" content="">
 
 		<!-- Le styles -->
-		<link href="asset/css/bootstrap.css" rel="stylesheet">
+		<link href="asset/css/bootstrap.min.css" rel="stylesheet">
 		<link href="asset/css/main.css" rel="stylesheet">
 		<style type="text/css">
 		  body {
@@ -20,7 +20,7 @@
 			padding: 9px 0;
 		  }
 		</style>
-		<link href="asset/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="asset/css/bootstrap-responsive.min.css" rel="stylesheet">
 		
 		<link rel='stylesheet' id='open-sans-css'  href='http://fonts.googleapis.com/css?family=Open+Sans%3A300%2C800&#038;ver=3.4.2' type='text/css' media='all' />
 		
@@ -66,10 +66,32 @@
 		</div>
 
 		</div><!--/.fluid-container-->
-
-		<!-- Le javascript
-		================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
+		
+		
+		
+		
+		<div id="APIExample" class="row-fluid template">
+			<div class="span12">
+				<div class="row-fluid exampleBox">
+					<div class="span6 contentBox labeled" data-label="Example">
+						<div class="editor">$1</div>
+					</div>
+					<div class="span6 contentBox labeled" data-label="Result">
+						<div class="result">No Result. Click the "Run" button.</div>
+					</div>
+				</div>
+				<div class="row-fluid exampleBox-actionBar">
+					<div class="span6">
+						<button data-action="reset" class="btn btn-primary pull-right" type="button">Reset <i class="icon-refresh"></i></button>
+					</div>
+					<div class="span6">
+						 <button data-action="run" class="btn btn-primary" type="button">Run <i class="icon-play"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
 		<script src="asset/js/mutation_summary.js"></script>
 		<script src="asset/js/jquery.js"></script>
 		<script src="asset/js/jquery.mutation.js"></script>

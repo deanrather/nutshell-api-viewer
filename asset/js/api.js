@@ -1,15 +1,29 @@
 var API=
 {
+	template:
+	{
+		APIExample:	null
+	},
 	init: function()
 	{
+		this.template.APIExample=$('#APIExample');
+		
 		$(window).resize(this.resizeNav);
 		$(window).bind('hashchange',this.onHashChangeTest);
-		$('#content').mutationSummary('connect',this.onDOMChange,[{ all: true }]);
+		$('body').on('click','[data-action="run"]',this.onClickRunExample);
+		$('body').on('click','[data-action="reset"]',this.onClickResetExample);
 		var ref=window.location.hash;
 		this.loadPage(ref);
 		this.getBreadcrumbs(ref);
 		this.selectActiveNavItem(ref);
 		this.resizeNav();
+	},
+	getTemplate: function(ref)
+	{
+		var template=this.template[ref].clone();
+		template.attr('id',null);
+		template.removeClass('template');
+		return template.html();
 	},
 	loadPage: function(ref)
 	{
@@ -21,13 +35,24 @@ var API=
 			function(response)
 			{
 				$('#content').html(response);
-				var editor=ace.edit($('.exampleBox .editor')[0]);
-				editor.setTheme('ace/theme/monokai');
-				editor.getSession().setMode('ace/mode/json');
-				
-				editor.setShowPrintMargin(false);
+				API.doMarkdown();
 			}
 		);
+	},
+	initEditors: function()
+	{
+		var exampleEditor=ace.edit($('.exampleBox .editor')[0]);
+		exampleEditor.setTheme('ace/theme/tomorrow_night');
+		exampleEditor.getSession().setMode('ace/mode/json');
+		exampleEditor.setShowPrintMargin(false);
+		exampleEditor.originalValue=exampleEditor.getValue();
+		
+		var resultEditor=ace.edit($('.exampleBox .result')[0]);
+		resultEditor.setTheme('ace/theme/tomorrow_night');
+		resultEditor.getSession().setMode('ace/mode/json');
+		resultEditor.setShowPrintMargin(false);
+		resultEditor.setReadOnly(true);
+		resultEditor.originalValue=resultEditor.getValue();
 	},
 	getBreadcrumbs: function(ref)
 	{
@@ -66,16 +91,40 @@ var API=
 			'postConversion',
 			function (text)
 			{
-				return text.replace(/\[Example\]([\s\S]*)\[\/Example\]/g,'<pre><code>$1</code></pre>');
+				return text.replace
+				(
+					/\[APIExample\]([\s\S]*)\[\/APIExample\]/g,
+					API.getTemplate('APIExample')
+				);
 			}
 		);
 		$('#content').html(converter.makeHtml($('#content').html()));
+		API.initEditors();
 	},
-	onDOMChange: function(result)
+	onClickRunExample: function(event)
 	{
-		// var changeset=result[0];
-		// console.debug(changeset);
-		
+		var	exampleBox		=$(event.currentTarget).parents('.exampleBox-actionBar').siblings('.exampleBox'),
+			exampleEditor	=exampleBox.find('.editor')[0].env.editor,
+			resultEditor	=exampleBox.find('.result')[0].env.editor;
+		$.post
+		(
+			'/api/',
+			exampleEditor.getValue(),
+			function(response)
+			{
+				resultEditor.setValue(JSON.stringify(response,null,2));
+			}
+		);
+	},
+	onClickResetExample: function(event)
+	{
+		var	exampleBox		=$(event.currentTarget).parents('.exampleBox-actionBar').siblings('.exampleBox'),
+			exampleEditor	=exampleBox.find('.editor')[0].env.editor,
+			resultEditor	=exampleBox.find('.result')[0].env.editor;
+		exampleEditor.setValue(exampleEditor.originalValue);
+		resultEditor.setValue(resultEditor.originalValue);
+		exampleEditor.clearSelection();
+		resultEditor.clearSelection();
 	}
 }
 
