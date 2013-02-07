@@ -2,11 +2,15 @@ var API=
 {
 	template:
 	{
-		APIExample:	null
+		APIExample:		null,
+		APIDetails:		null,
+		APIDescription:	null
 	},
 	init: function()
 	{
-		this.template.APIExample=$('#APIExample');
+		this.template.APIExample	=$('#APIExample');
+		this.template.APIDetails	=$('#APIDetails');
+		this.template.APIDescription=$('#APIDescription');
 		
 		$(window).resize(this.resizeNav);
 		$(window).bind('hashchange',this.onHashChangeTest);
@@ -23,7 +27,7 @@ var API=
 		var template=this.template[ref].clone();
 		template.attr('id',null);
 		template.removeClass('template');
-		return template.html();
+		return template[0].outerHTML;
 	},
 	loadPage: function(ref)
 	{
@@ -91,11 +95,64 @@ var API=
 			'postConversion',
 			function (text)
 			{
-				return text.replace
-				(
-					/\[APIExample\]([\s\S]*)\[\/APIExample\]/g,
-					API.getTemplate('APIExample')
-				);
+				var keyVals			={},
+					params			=[],
+					details			=$(API.getTemplate('APIDetails')),
+					description		=$(API.getTemplate('APIDescription')),
+					foundDescription=null,
+					parts			=[],
+					HTML			=[];
+				keyVals.call		=text.match(/\[call=([\w\.]*)\]/)[1];
+				keyVals.type		=text.match(/\[type=([\w\.]*)\]/)[1];
+				keyVals.parameters	=[];
+				params				=text.match(/\[Parameters\]([\s\S]*)\[\/Parameters\]/);
+				if (params[1]!=null)
+				{
+					params=params[1].split(/\n/);
+					for (var i=0,j=params.length; i<j; i++)
+					{
+						if (params[i]!='')
+						{
+							parts=params[i].split('=');
+							keyVals.parameters.push
+							(
+								[
+									'<tr>',
+										'<th>'+parts[0]+'</th>',
+										'<td>'+parts[1]+'</td>',
+									'</tr>'
+								].join('')
+							);
+						}
+					}
+				}
+				
+				keyVals.parameters=keyVals.parameters.join('');
+				
+				details.find('[data-key="call"]').html(keyVals.call);
+				details.find('[data-key="type"]').html(keyVals.type);
+				details.find('[data-key="parameters"] tr:first').after(keyVals.parameters);
+				
+				foundDescription=text.match(/\[Description\]([\s\S]*)\[\/Description\]/);
+				if (foundDescription)
+				{
+					description.find('p').html(foundDescription[1]);
+				}
+				
+				console.debug(details.html());
+				
+				
+				text=text	.replace(/\[call=([\w\.]*)\]/,details.html())
+							.replace(/\[type=([\w\.]*)\]/,'')
+							.replace(/\[Parameters\]([\s\S]*)\[\/Parameters\]/,'')
+							.replace(/\[Description\]([\s\S]*)\[\/Description\]/,description.html())
+							.replace
+							(
+								/\[APIExample\]([\s\S]*)\[\/APIExample\]/g,
+								API.getTemplate('APIExample')
+							);
+				
+				return text;
 			}
 		);
 		$('#content').html(converter.makeHtml($('#content').html()));

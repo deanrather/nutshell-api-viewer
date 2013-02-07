@@ -69,32 +69,77 @@
 		
 		
 		
-		
-		<div id="APIExample" class="row-fluid template">
-			<div class="span12">
-				<div class="row-fluid exampleBox">
-					<div class="span6 contentBox labeled" data-label="Example">
-						<div class="editor">$1</div>
+		<div id="APIExample" class="template">
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="row-fluid exampleBox">
+						<div class="span6 contentBox labeled" data-label="Example">
+							<div class="editor">$1</div>
+						</div>
+						<div class="span6 contentBox labeled" data-label="Result">
+							<div class="result">No Result. Click the "Run" button.</div>
+						</div>
 					</div>
-					<div class="span6 contentBox labeled" data-label="Result">
-						<div class="result">No Result. Click the "Run" button.</div>
-					</div>
-				</div>
-				<div class="row-fluid exampleBox-actionBar">
-					<div class="span6">
-						<button data-action="reset" class="btn btn-primary pull-right" type="button">Reset <i class="icon-refresh"></i></button>
-					</div>
-					<div class="span6">
-						 <button data-action="run" class="btn btn-primary" type="button">Run <i class="icon-play"></i></button>
+					<div class="row-fluid exampleBox-actionBar">
+						<div class="span6">
+							<button data-action="reset" class="btn btn-primary pull-right" type="button">Reset <i class="icon-refresh"></i></button>
+						</div>
+						<div class="span6">
+							 <button data-action="run" class="btn btn-primary" type="button">Run <i class="icon-play"></i></button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		
+		<div id="APIDetails" class="template">
+			<div class="row-fluid">
+				<div class="span6">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th colspan="2">General</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>API Call</th>
+								<td data-key="call"></td>
+							</tr>
+							<tr>
+								<th>Data Type</th>
+								<td data-key="type"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="span6">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th colspan="2">Parameters</th>
+							</tr>
+						</thead>
+						<tbody data-key="parameters">
+							<tr>
+								<th>Name</th>
+								<th>Reference</th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 		
-		<script src="asset/js/mutation_summary.js"></script>
+		<div id="APIDescription" class="template">
+			<div class="container-fluid">
+				<div class="span12 contentBox">
+					<p></p>
+				</div>
+			</div>
+		</div>
+		
 		<script src="asset/js/jquery.js"></script>
-		<script src="asset/js/jquery.mutation.js"></script>
 		<script src="asset/js/bootstrap.min.js"></script>
 		<script src="asset/js/markdown.js"></script>
 		<script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
