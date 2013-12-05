@@ -1,0 +1,23 @@
+{
+	"name":             "nutshell/btlViewer",
+	"type":             "nutshell-plugin",
+	"description":      "BTL API Viewer",
+	"authors":
+    [
+        {
+            "name": "Timothy Chandler",
+            "email": "tim@geomash.com"
+        }
+    ],
+	"require":
+    {
+        "composer/installers": "~1.0"
+    },
+	"repositories":
+    [
+	    {
+			"type": "git",
+			"url":  "http://git.geomash.com/open-source/composer-installers.git"
+		}
+    ]
+}
