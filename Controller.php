@@ -1,12 +1,12 @@
 <?php
-namespace application\plugin\btlViewer
+namespace application\geomash\plugin\btlViewer
 {
 	use nutshell\Nutshell;
 	use nutshell\plugin\mvc\Mvc;
 	use nutshell\plugin\mvc\Controller as MvcController;
 	use nutshell\core\exception\NutshellException;
 	
-	use application\helper\MimeHelper;
+	use application\geomash\helper\MimeHelper;
 	
 	abstract class Controller extends MvcController
 	{
