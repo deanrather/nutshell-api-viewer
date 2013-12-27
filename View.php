@@ -1,5 +1,5 @@
 <?php
-namespace application\geomash\plugin\btlViewer
+namespace application\plugin\btlViewer
 {
 	use nutshell\Nutshell;
 	use nutshell\plugin\mvc\Mvc;
